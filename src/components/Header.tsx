@@ -20,15 +20,18 @@ export default function Header() {
     <div className="bg-white border-b border-gray-200 px-6 py-4 w-full">
       <div className="flex items-center justify-between w-full">
         <div className="flex items-center space-x-6">
-          <div className="flex items-center space-x-2 text-sm text-gray-500">
-            <span>Dashboard</span>
-          </div>
+          <Image
+            src="/icons/board_app_icon.png"
+            alt="App Logo"
+            width={97}
+            height={24}
+          />
         </div>
 
         <div className="flex items-center space-x-4">
-          <button className="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+          <button className="w-[170px] h-[48px] flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+            <span className="text-[12px]">Create new board</span>
             <Plus className="w-4 h-4" />
-            <span>Create new board</span>
           </button>
 
           <div className="relative">
