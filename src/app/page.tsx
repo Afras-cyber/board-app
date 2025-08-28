@@ -1,29 +1,140 @@
+'use client';
+
+import React, { useEffect, useState } from "react";
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import Header from "@/components/Header";
 import ProjectHeader from "@/components/ProjectHeader";
-import Sidebar from "@/components/Siderbar";
-import React from "react";
+import Sidebar from "@/components/Siderbar"; // Fixed: was "Siderbar"
+import Swimlane from "@/components/Swimlane";
+import TaskCard from "@/components/TaskCard";
+import { useTaskStore, Task, TaskStatus } from "@/lib/store/taskStore";
 
-function page() {
+export default function Dashboard() { // Changed from 'page' to 'Dashboard'
+  const { tasks, filteredTasks, setTasks, moveTask } = useTaskStore();
+  const [activeTask, setActiveTask] = useState<Task | null>(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    })
+  );
+
+  useEffect(() => {
+    const loadTasks = async () => {
+      try {
+        const response = await fetch("/api/tasks");
+        if (!response.ok) {
+          // Fallback to mock data if API fails
+          const mockData: any = await import("@/lib/data/task.json"); // Fixed: was "task.json"
+          setTasks(mockData.tasks);
+          return;
+        }
+        const data = await response.json();
+        setTasks(data.tasks);
+      } catch (error) {
+        // Load mock data as fallback
+        console.error("Failed to load tasks, using mock data:", error);
+        const mockData: any = await import("@/lib/data/task.json"); // Fixed: was "task.json"
+        setTasks(mockData.tasks);
+      }
+    };
+
+    if (tasks.length === 0) {
+      loadTasks();
+    }
+  }, [tasks.length, setTasks]);
+
+  const handleDragStart = (event: DragStartEvent) => {
+    const { active } = event;
+    const task = filteredTasks.find((t) => t.id === active.id);
+    setActiveTask(task || null);
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+
+    if (!over) return;
+
+    const taskId = active.id as string;
+    const newStatus = over.id as TaskStatus;
+
+    moveTask(taskId, newStatus);
+    setActiveTask(null);
+  };
+
+  const getTasksByStatus = (status: TaskStatus) => {
+    return filteredTasks.filter((task) => task.status === status);
+  };
+
+  const statusConfig = {
+    todo: { title: "To Do", color: "bg-gray-100 text-gray-700" },
+    inprogress: {
+      title: "In Progress",
+      color: "bg-yellow-100 text-yellow-700",
+    },
+    approved: { title: "Approved", color: "bg-green-100 text-green-700" },
+    rejected: { title: "Reject", color: "bg-red-100 text-red-700" },
+  };
+
   return (
-    <div className="w-[1400px] h-[1024px] bg-gray-200 mx-auto ">
-      <div className="w-full h-[80px] bg-white text-white flex items-center px-4">
+    <div className="w-full max-w-[1400px] min-h-screen bg-gray-200 mx-auto">
+      {/* Header */}
+      <div className="w-full h-[80px] bg-white flex items-center px-4">
         <Header />
       </div>
-      <div className="w-full h-[calc(100vh-4rem)] bg-gray-100 flex">
-        <div className="w-[288px] h-full bg-red-100">
+      
+      {/* Main Content */}
+      <div className="w-full min-h-[calc(100vh-80px)] bg-gray-100 flex">
+        {/* Sidebar */}
+        <div className="w-[288px] bg-white border-r border-gray-200">
           <Sidebar />
         </div>
-        <div className="w-full h-full bg-blue-100 space-y-4 overflow-y-auto">
-      
-            <div className="h-[174px] w-full bg-green-300 border-t-1">
-              <ProjectHeader/>
-            </div>
-         
-          <div>Tasks board</div>
+        
+        {/* Content Area */}
+        <div className="flex-1 bg-gray-50 overflow-hidden">
+          {/* Project Header */}
+          <div className="h-[174px] w-full bg-white border-b border-gray-200">
+            <ProjectHeader />
+          </div>
+          
+          {/* Swimlanes */}
+          <div className="flex-1 overflow-auto">
+            <DndContext
+              sensors={sensors}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+            >
+              <div className="p-6">
+                <div className="flex space-x-6 overflow-x-auto pb-4">
+                  {(Object.keys(statusConfig) as TaskStatus[]).map((status) => (
+                    <Swimlane
+                      key={status}
+                      id={status}
+                      title={statusConfig[status].title}
+                      color={statusConfig[status].color}
+                      tasks={getTasksByStatus(status)}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <DragOverlay>
+                {activeTask ? <TaskCard task={activeTask} /> : null}
+              </DragOverlay>
+            </DndContext>
+          </div>
         </div>
       </div>
     </div>
   );
 }
-
-export default page;

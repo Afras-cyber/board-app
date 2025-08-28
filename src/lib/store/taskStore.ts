@@ -1,40 +1,82 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-interface Task {
+export type TaskStatus = 'todo' | 'inprogress' | 'approved' | 'rejected';
+
+export interface Task {
   id: string;
   title: string;
-  status: string;
-  priority: string;
+  description: string;
+  status: TaskStatus;
+  category: string;
+  assignees: string[];
+  attachments?: number;
+  comments?: number;
+  dueDate?: string;
+  priority: 'low' | 'medium' | 'high';
+  reports?: number;
+  stream?: boolean;
+  hasImage?: boolean;
+  groupCall?: boolean;
 }
 
 interface TaskStore {
   tasks: Task[];
-  fetchTasks: () => void;
-  moveTask: (taskId: string, newStatus: string) => void;
+  searchQuery: string;
+  filteredTasks: Task[];
+  setTasks: (tasks: Task[]) => void;
+  moveTask: (taskId: string, newStatus: TaskStatus) => void;
+  setSearchQuery: (query: string) => void;
+  updateFilteredTasks: () => void;
 }
 
 export const useTaskStore = create<TaskStore>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       tasks: [],
-      fetchTasks: () => {
-        const mockTasks = [
-          { id: '1', title: 'User Interview', status: 'To Do', priority: 'Low' },
-          { id: '2', title: 'UI Design', status: 'In Progress', priority: 'High' },
-          { id: '3', title: 'Prototype', status: 'Approved', priority: 'Low' },
-        ];
-        set({ tasks: mockTasks });
+      searchQuery: '',
+      filteredTasks: [],
+      
+      setTasks: (tasks) => {
+        set({ tasks, filteredTasks: tasks });
       },
-      moveTask: (taskId: string, newStatus: string) =>
-        set((state) => ({
-          tasks: state.tasks.map(task =>
+      
+      moveTask: (taskId, newStatus) => {
+        set((state) => {
+          const updatedTasks = state.tasks.map((task) =>
             task.id === taskId ? { ...task, status: newStatus } : task
-          ),
-        })),
+          );
+          return {
+            tasks: updatedTasks,
+            filteredTasks: updatedTasks.filter(task => 
+              task.title.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+              task.description.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+              task.category.toLowerCase().includes(state.searchQuery.toLowerCase())
+            )
+          };
+        });
+      },
+      
+      setSearchQuery: (query) => {
+        set({ searchQuery: query });
+        get().updateFilteredTasks();
+      },
+      
+      updateFilteredTasks: () => {
+        set((state) => ({
+          filteredTasks: state.searchQuery
+            ? state.tasks.filter(task => 
+                task.title.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                task.description.toLowerCase().includes(state.searchQuery.toLowerCase()) ||
+                task.category.toLowerCase().includes(state.searchQuery.toLowerCase())
+              )
+            : state.tasks
+        }));
+      }
     }),
     {
       name: 'task-storage',
+      partialize: (state) => ({ tasks: state.tasks })
     }
   )
 );

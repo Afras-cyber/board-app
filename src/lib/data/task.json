@@ -1,0 +1,187 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "User Interview",
+      "description": "Research",
+      "status": "todo",
+      "category": "Research",
+      "assignees": ["user1"],
+      "attachments": 2,
+      "comments": 2,
+      "dueDate": "Tomorrow",
+      "priority": "medium"
+    },
+    {
+      "id": "2",
+      "title": "Design System",
+      "description": "Design",
+      "status": "todo",
+      "category": "Design",
+      "assignees": ["user2", "user3"],
+      "attachments": 3,
+      "comments": 8,
+      "reports": 2,
+      "priority": "high"
+    },
+    {
+      "id": "3",
+      "title": "Speech",
+      "description": "Other",
+      "status": "todo",
+      "category": "Other",
+      "assignees": ["user1", "user2"],
+      "attachments": 1,
+      "comments": 3,
+      "stream": true,
+      "priority": "low"
+    },
+    {
+      "id": "4",
+      "title": "Wireframe",
+      "description": "Design",
+      "status": "todo",
+      "category": "Design",
+      "assignees": ["user2", "user3"],
+      "attachments": 0,
+      "comments": 0,
+      "priority": "medium"
+    },
+    {
+      "id": "5",
+      "title": "UI Design",
+      "description": "Design",
+      "status": "inprogress",
+      "category": "Design",
+      "assignees": ["user1", "user2"],
+      "attachments": 2,
+      "comments": 2,
+      "dueDate": "Tomorrow",
+      "priority": "high"
+    },
+    {
+      "id": "6",
+      "title": "Check Clients Feedback",
+      "description": "Feedback",
+      "status": "inprogress",
+      "category": "Feedback",
+      "assignees": ["user3", "user4"],
+      "attachments": 0,
+      "comments": 0,
+      "priority": "medium",
+      "hasImage": true
+    },
+    {
+      "id": "7",
+      "title": "Copyright",
+      "description": "Legal",
+      "status": "inprogress",
+      "category": "Legal",
+      "assignees": ["user1"],
+      "attachments": 8,
+      "dueDate": "22 April, 2022",
+      "priority": "low"
+    },
+    {
+      "id": "8",
+      "title": "Filter sorting",
+      "description": "UX Research",
+      "status": "inprogress",
+      "category": "Research",
+      "assignees": ["user2", "user3"],
+      "attachments": 4,
+      "dueDate": "22 April, 2022",
+      "priority": "medium"
+    },
+    {
+      "id": "9",
+      "title": "Prototype",
+      "description": "Research",
+      "status": "approved",
+      "category": "Research",
+      "assignees": ["user1", "user2", "user3"],
+      "attachments": 35,
+      "comments": 243,
+      "priority": "high"
+    },
+    {
+      "id": "10",
+      "title": "Detail Page",
+      "description": "Design",
+      "status": "approved",
+      "category": "Design",
+      "assignees": ["user2", "user4"],
+      "attachments": 0,
+      "comments": 0,
+      "priority": "medium",
+      "hasImage": true
+    },
+    {
+      "id": "11",
+      "title": "Animation preloaders",
+      "description": "",
+      "status": "approved",
+      "category": "Development",
+      "assignees": ["user3"],
+      "attachments": 0,
+      "comments": 0,
+      "priority": "low"
+    },
+    {
+      "id": "12",
+      "title": "Sorting category",
+      "description": "UX Research",
+      "status": "approved",
+      "category": "Research",
+      "assignees": ["user1", "user2", "user4"],
+      "attachments": 4,
+      "comments": 9,
+      "priority": "medium"
+    },
+    {
+      "id": "13",
+      "title": "Group Management",
+      "description": "Other",
+      "status": "rejected",
+      "category": "Other",
+      "assignees": ["user1"],
+      "attachments": 329,
+      "groupCall": true,
+      "priority": "high"
+    },
+    {
+      "id": "14",
+      "title": "Design System",
+      "description": "Design",
+      "status": "rejected",
+      "category": "Design",
+      "assignees": ["user2"],
+      "attachments": 3,
+      "comments": 8,
+      "reports": 2,
+      "priority": "medium"
+    },
+    {
+      "id": "15",
+      "title": "Slider controls",
+      "description": "Interface",
+      "status": "rejected",
+      "category": "Interface",
+      "assignees": ["user3", "user4"],
+      "attachments": 8,
+      "comments": 31,
+      "priority": "low"
+    },
+    {
+      "id": "16",
+      "title": "Slider controls",
+      "description": "Design",
+      "status": "rejected",
+      "category": "Design",
+      "assignees": ["user1", "user3"],
+      "attachments": 0,
+      "comments": 0,
+      "priority": "medium"
+    }
+  ]
+}
