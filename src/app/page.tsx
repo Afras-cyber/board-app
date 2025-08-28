@@ -90,7 +90,7 @@ export default function Dashboard() {
   return (
     <div className="w-full max-w-[1400px] min-h-screen bg-gray-200 mx-auto">
       {/* Header */}
-      <div className="w-full h-[80px] bg-white flex items-center px-4">
+      <div className="w-full h-[80px] bg-white flex items-center px-4 border-b-1 border-gray-200">
         <Header />
       </div>
 

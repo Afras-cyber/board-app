@@ -20,9 +20,9 @@ export default function Sidebar() {
   const [isBoardsOpen, setBoardsOpen] = useState(true);
 
   return (
-    <div className="h-[97%] bg-white border-r border-gray-200  flex flex-col">
+    <div className="h-[97%] bg-white   flex flex-col">
       <nav className="flex-1 px-4">
-        <div className="space-y-1">
+        <div className="space-y-1 mt-4">
           {/* Project Info */}
           <div className="w-[240px] h-[64px] flex items-center border-gray-200 rounded-lg border-[2px] ">
             <div className="flex items-center justify-between w-full px-3">
