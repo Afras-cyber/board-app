@@ -14,9 +14,11 @@ function page() {
           <Sidebar />
         </div>
         <div className="w-full h-full bg-blue-100 space-y-4 overflow-y-auto">
-          <div className="p-4 w-full bg-green-200">
-            <div className="h-[174px] w-full bg-green-300"></div>
-          </div>
+      
+            <div className="h-[174px] w-full bg-green-300 border-t-1">
+              <ProjectHeader/>
+            </div>
+         
           <div>Tasks board</div>
         </div>
       </div>
