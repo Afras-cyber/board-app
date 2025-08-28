@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -17,7 +17,8 @@ import Swimlane from "@/components/Swimlane";
 import TaskCard from "@/components/TaskCard";
 import { useTaskStore, Task, TaskStatus } from "@/lib/store/taskStore";
 
-export default function Dashboard() { // Changed from 'page' to 'Dashboard'
+export default function Dashboard() {
+  // Changed from 'page' to 'Dashboard'
   const { tasks, filteredTasks, setTasks, moveTask } = useTaskStore();
   const [activeTask, setActiveTask] = useState<Task | null>(null);
 
@@ -80,10 +81,10 @@ export default function Dashboard() { // Changed from 'page' to 'Dashboard'
     todo: { title: "To Do", color: "bg-gray-100 text-gray-700" },
     inprogress: {
       title: "In Progress",
-      color: "bg-yellow-100 text-yellow-700",
+      color: "bg-[#FFA800] text-yellow-700",
     },
-    approved: { title: "Approved", color: "bg-green-100 text-green-700" },
-    rejected: { title: "Reject", color: "bg-red-100 text-red-700" },
+    approved: { title: "Approved", color: "bg-[#AEE753] text-green-700" },
+    rejected: { title: "Reject", color: "bg-[#F90430] text-white" },
   };
 
   return (
@@ -92,21 +93,21 @@ export default function Dashboard() { // Changed from 'page' to 'Dashboard'
       <div className="w-full h-[80px] bg-white flex items-center px-4">
         <Header />
       </div>
-      
+
       {/* Main Content */}
       <div className="w-full min-h-[calc(100vh-80px)] bg-gray-100 flex">
         {/* Sidebar */}
         <div className="w-[288px] bg-white border-r border-gray-200">
           <Sidebar />
         </div>
-        
+
         {/* Content Area */}
         <div className="flex-1 bg-gray-50 overflow-hidden">
           {/* Project Header */}
           <div className="h-[174px] w-full bg-white border-b border-gray-200">
             <ProjectHeader />
           </div>
-          
+
           {/* Swimlanes */}
           <div className="flex-1 overflow-auto">
             <DndContext
@@ -114,8 +115,8 @@ export default function Dashboard() { // Changed from 'page' to 'Dashboard'
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
             >
-              <div className="p-6">
-                <div className="flex space-x-6 overflow-x-auto pb-4">
+              <div className="">
+                <div className="flex  overflow-x-auto ">
                   {(Object.keys(statusConfig) as TaskStatus[]).map((status) => (
                     <Swimlane
                       key={status}
