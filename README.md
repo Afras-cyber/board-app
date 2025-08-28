@@ -12,7 +12,7 @@ This is a demonstration application developed for Vision Ex Digital (visionexdig
 - 🎨 Modern UI with Tailwind CSS
 
 ## Tech Stack
-- **Framework:** Next.js 13+ (App Router)
+- **Framework:** Next.js 15+ (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS
 - **State Management:** Zustand
