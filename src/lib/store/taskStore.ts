@@ -43,9 +43,11 @@ export const useTaskStore = create<TaskStore>()(
       
       moveTask: (taskId, newStatus) => {
         set((state) => {
+          console.log('Moving task:', taskId, 'to status:', newStatus);
           const updatedTasks = state.tasks.map((task) =>
             task.id === taskId ? { ...task, status: newStatus } : task
           );
+          console.log('Updated tasks:', updatedTasks);
           return {
             tasks: updatedTasks,
             filteredTasks: updatedTasks.filter(task => 

@@ -19,8 +19,7 @@ export default function Swimlane({ id, title, tasks, color }: SwimlaneProps) {
   const { setNodeRef } = useDroppable({ id });
 
   return (
-    <div className="bg-white min-h-[600px] w-70 flex-shrink-0 border-r-1">
-      {/* Swimlane Header */}
+    <div className="bg-white min-h-[600px] w-69 flex-shrink-0 border-r-1">
       <div className="flex items-center justify-between border-b-1 p-3 ">
         <div className="flex items-center space-x-2">
           <span
@@ -51,7 +50,6 @@ export default function Swimlane({ id, title, tasks, color }: SwimlaneProps) {
           </div>
         </SortableContext>
       </div>
-      {/* Task List */}
     </div>
   );
 }

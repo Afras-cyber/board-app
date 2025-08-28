@@ -86,6 +86,7 @@ export default function TaskCard({ task }: TaskCardProps) {
         <div className="flex -space-x-3">
           {task.assignees.slice(0, 3).map((assignee, index) => (
             <Image
+            key={assignee}
               src="/icons/user_profile.png"
               alt={assignee}
               width={32}
@@ -116,8 +117,8 @@ export default function TaskCard({ task }: TaskCardProps) {
         <div
           className={`flex items-center space-x-1 bg-gray-100 px-2 py-1 rounded`}
         >
-          <PriorityIcon className="w-4 h-5 text-gray-300" />
-          <span className="text-xs font-medium text-gray-300">
+          <PriorityIcon className="w-3 h-4 text-gray-300" />
+          <span className="text-[10px] font-medium text-gray-300">
             {priorityConfig[task.priority].text}
           </span>
         </div>
@@ -127,6 +128,7 @@ export default function TaskCard({ task }: TaskCardProps) {
       {task.hasImage && (
         <div className="w-full h-24 bg-gray-700 rounded-md mb-4 flex items-center justify-center">
           <Image
+          key={task.id}
             src="/icons/bg_image.png"
             alt="Task Image"
             width={400}

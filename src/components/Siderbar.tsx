@@ -23,7 +23,7 @@ export default function Sidebar() {
     <div className="h-[97%] bg-white   flex flex-col">
       <nav className="flex-1 px-4">
         <div className="space-y-1 mt-4">
-          {/* Project Info */}
+
           <div className="w-[240px] h-[64px] flex items-center border-gray-200 rounded-lg border-[2px] ">
             <div className="flex items-center justify-between w-full px-3">
               <div className="flex items-center space-x-3">
@@ -51,22 +51,22 @@ export default function Sidebar() {
 
           <div className="space-y-2 mt-2">
             <div
-              className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer border-gray-200 rounded-lg border-[2px] w-[240px] h-[46px]"
+              className="flex items-center px-3 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer border-gray-200 rounded-lg border-[2px] w-[240px] h-[46px]"
               onClick={() => setBoardsOpen(!isBoardsOpen)}
             >
               <Folder className="w-5 h-5 mr-3" />
-              <span className="flex-1">Boards</span>
-              {/* 
+              <span className={`flex-1 ${isBoardsOpen && 'text-blue-500'}`}>Boards</span>
+              
               {isBoardsOpen ? (
-                <ChevronDown className="w-4 h-4" />
+                <ChevronDown className={`w-4 h-4 ${isBoardsOpen && 'text-blue-500'}`} />
               ) : (
                 <ChevronRight className="w-4 h-4" />
-              )} */}
+              )}
             </div>
 
             {isBoardsOpen && (
-              <div className="flex flex-col items-start px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg cursor-pointer border-gray-200 rounded-lg border-[2px] w-[240px] ">
-                <ul>
+              <div className="flex flex-col items-start  py-2 text-gray-700  rounded-lg  border-gray-200  border-[2px] w-[240px] ">
+                <ul className="w-full">
                   {[
                     {
                       id: 1,
@@ -81,7 +81,7 @@ export default function Sidebar() {
                     { id: 3, name: "Sport Xi Project", active: true },
                     { id: 4, name: "Wordpress theme", active: false },
                   ]?.map((board) => (
-                    <li key={board.id} className="flex items-center">
+                    <li key={board.id} className="flex items-center hover:bg-gray-100 cursor-pointer px-3">
                       <ChevronRight
                         className={`${
                           board.active && "text-blue-600"
